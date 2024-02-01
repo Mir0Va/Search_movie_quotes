@@ -31,13 +31,25 @@ def get_embeddings(string : str, model = "text-embedding-3-small", save_to_file 
             fl.write(f'{embeddings}')
     return embeddings.data[0].embedding
 
-def get_embeddings_for_df(df : pd.DataFrame, model="text-embedding-3-small", save=False):
-    df["embeddings"] = df["text"].apply(lambda line: get_embeddings(line, model=model))
-    if save:
-        df.to_csv("Embeddings.csv")
+def get_embeddings_for_df(df : pd.DataFrame, model="text-embedding-3-small", save_to_file=None, col_name="quote"):
+    '''
+    This function tries to send a post request to OpenAI to make embeddings for a DataFrame object's column.
+
+    Arguments:
+    df          :        the df that contains the text to embed
+    model       :        (Optional) choose the model
+    save_to_file:        (Optional) save the df to csv
+    col_name    :        (Optional) the column name of the text meant for embedding 
+
+    returns     :        changes the original df
+    '''   
+    df["embeddings"] = df[col_name].apply(lambda line: get_embeddings(line, model=model))
+    if save_to_file:
+        df.to_csv(save_to_file)
 
 if __name__ == "__main__":
-    test = "Hello world!"
-    file = "Dump.txt"
+    df = pd.DataFrame(["ax", "cool", "Hello"], columns=["quote"])
+    #get_embeddings_for_df(df=df,save_to_file="Test")
+    #print(df)
     #print(openai_key )
     
