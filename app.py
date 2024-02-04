@@ -5,6 +5,8 @@
 from flask import Flask, request, render_template
 import Embeddings
 import Snowflake_tools
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
 
@@ -20,4 +22,4 @@ def get_search():
     return render_template("results.html", query=query, results=results)
 
 if __name__=="__main__":
-    app.run()
+    app.run(port = os.getenv("PORT"))
