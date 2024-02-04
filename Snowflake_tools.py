@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from snowflake.connector import DictCursor
 import pandas as pd
 from snowflake.connector.pandas_tools import write_pandas
+import Embeddings
 
 def remove_quotes(string : str):
     return string.strip('\"')
@@ -30,6 +31,22 @@ conn = snowflake.connector.connect(
 )
 
 cur = conn.cursor(DictCursor)
+
+def to_df(emb_ls):
+    '''
+    Creates a df from list of embeddings to serve to the data pipline.
+
+    Arguments:
+    emb_ls   :    List of embeddings.
+
+    Returns:      pd.DataFrame
+    '''
+    return pd.DataFrame(data=[[emb_ls]], columns=["EMBD"])
+
+def search_query(query):
+    search_item = to_df(Embeddings.get_embeddings(query))
+    results     = do_embedding_search(search_df=search_item)
+    return results
 
 def get_table(table_name="EMBEDDINGS"):
     '''
