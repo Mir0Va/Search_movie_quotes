@@ -1,4 +1,4 @@
 requests
 openai
 pandas
-snowflake.connector
+snowflake
