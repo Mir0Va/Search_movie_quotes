@@ -1,5 +1,5 @@
 requests
 openai
 pandas
-snowflake
+snowflake-connector-python
 python-dotenv
