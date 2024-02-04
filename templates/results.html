@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Results</title>
+  </head>
+  <body>
+    <form action="/search" method="GET">
+      <input type="text" id="query" name="query" value="{{ query }}">
+      <input type="submit" value="search">
+    </form> 
+    <div id="results">
+    <h1>Results</h1>
+    {% if results %}
+      <table> 
+      {% for result in results %}
+        {% for key,val in result.items() %}
+          <tr>
+            <th>{{ key }}:</th>
+            <td>{{ val }}</td>
+          </tr>
+        {% endfor %}
+        <tr><td><br></br></td></tr>
+      {% endfor %}
+      </table>
+    {% else %}
+      <p>The query must be less than 250 characters long!</p>
+    {% endif %}
+    </div>
+  </body>
+</html>
