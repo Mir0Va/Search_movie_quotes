@@ -13,20 +13,20 @@ def remove_quotes(string : str):
     return string.strip('\"')
 
 load_dotenv()
-PASSWORD  = os.getenv('SNOWSQL_PWD')
-WAREHOUSE = os.getenv('WAREHOUSE')
-ACCOUNT   = os.getenv("SNOWSQL_ACC")
-USER      = os.getenv("SNOWSQL_USR")
-DATABASE  = os.getenv("SNOWSQL_DB")
-SCHEMA    = os.getenv("SNOWSQL_SCHEMA")
+PASSWORD  = remove_quotes(os.getenv('SNOWSQL_PWD'))
+WAREHOUSE = remove_quotes(os.getenv('WAREHOUSE'))
+ACCOUNT   = remove_quotes(os.getenv("SNOWSQL_ACC"))
+USER      = remove_quotes(os.getenv("SNOWSQL_USR"))
+DATABASE  = remove_quotes(os.getenv("SNOWSQL_DB"))
+SCHEMA    = remove_quotes(os.getenv("SNOWSQL_SCHEMA"))
 
 conn = snowflake.connector.connect(
-    user      = remove_quotes(USER),
-    password  = remove_quotes(PASSWORD),
-    account   = remove_quotes(ACCOUNT),
-    warehouse = remove_quotes(WAREHOUSE),
-    database  = remove_quotes(DATABASE),
-    schema    = remove_quotes(SCHEMA),
+    user      = USER,
+    password  = PASSWORD,
+    account   = ACCOUNT,
+    warehouse = WAREHOUSE,
+    database  = DATABASE,
+    schema    = SCHEMA,
 )
 
 cur = conn.cursor(DictCursor)
