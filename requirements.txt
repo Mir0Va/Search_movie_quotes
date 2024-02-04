@@ -3,4 +3,3 @@ openai
 pandas
 snowflake
 dotenv
-json
