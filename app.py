@@ -22,4 +22,4 @@ def get_search():
     return render_template("results.html", query=query, results=results)
 
 if __name__=="__main__":
-    app.run(port = os.getenv("PORT"))
+    app.run(host = "0.0.0.0",port = 1000)
