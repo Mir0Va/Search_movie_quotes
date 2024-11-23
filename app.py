@@ -4,7 +4,7 @@
 
 from flask import Flask, request, render_template
 import Embeddings
-import Snowflake_tools
+import local_db
 from dotenv import load_dotenv
 import os
 
@@ -18,7 +18,7 @@ def search():
 def get_search():
     query = request.args.get('query')
     if len(query)<=250:
-        results = Snowflake_tools.search_query(query)
+        results = local_db.search_query(query)
     return render_template("results.html", query=query, results=results)
 
 if __name__=="__main__":
