@@ -2,5 +2,5 @@ flask
 requests
 openai
 pandas
-snowflake-connector-python
 python-dotenv
+scikit-learn
